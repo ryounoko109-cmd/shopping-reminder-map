@@ -1,4 +1,4 @@
-export const subscriptions = [];
+import { subscriptions } from "@/app/lib/subscriptions";
 
 export async function POST(req) {
   const sub = await req.json();

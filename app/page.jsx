@@ -1,12 +1,8 @@
-import Link from "next/link";
-
 export default function Home() {
   return (
-    <main>
-      <h1>はじめてのNext.jsアプリ</h1>
-      <p>トップページです</p>
-
-      <Link href="/memo">メモ画面へ</Link>
+    <main style={{ padding: 20 }}>
+      <h1>🛒 買い物忘れ防止アプリ</h1>
+      <a href="/map">▶ 地図を開く</a>
     </main>
   );
 }
