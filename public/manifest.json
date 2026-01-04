@@ -1,0 +1,15 @@
+{
+  "name": "買い物忘れ防止アプリ",
+  "short_name": "買い物通知",
+  "start_url": "/map",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007aff",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

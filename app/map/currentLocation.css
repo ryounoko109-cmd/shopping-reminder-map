@@ -1,0 +1,15 @@
+.current-location {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+/* 中心点だけ */
+.current-location .dot {
+  position: absolute;
+  inset: 0;
+  background: #1a73e8;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
