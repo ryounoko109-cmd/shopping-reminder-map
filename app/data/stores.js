@@ -1,27 +1,23 @@
-import { STORE_TYPES } from "../constants/storeTypes";
+"use client";
 
-export const stores = [
-  {
-   id: 1,
-    name: "スーパーA",
-    lat: 35.6814,
-    lng: 139.767,
-    items: ["牛乳", "卵"],
-    radius: 100,
-  },
-  {
-    id: 2,
-    name: "△△コンビニ",
-    type: STORE_TYPES.CONVENIENCE,
-    position: [35.6825, 139.768],
-    items: ["おにぎり"],
-  },
-  {
-   id: 2,
-    name: "ドラッグストアB",
-    lat: 35.6809,
-    lng: 139.768,
-    items: ["マスク"],
-    radius: 200,
-  },
-];
+export default function StoreList({ stores }) {
+  return (
+    <div style={{
+      position:"absolute",
+      top:10,
+      left:10,
+      zIndex:1000,
+      background:"#fff",
+      padding:10,
+      borderRadius:8,
+      maxWidth:200
+    }}>
+      <b>登録店舗</b>
+      <ul>
+        {stores.map(s => (
+          <li key={s.id}>{s.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}

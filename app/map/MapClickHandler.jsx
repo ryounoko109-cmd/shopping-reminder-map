@@ -1,13 +1,11 @@
 "use client";
-
 import { useMapEvents } from "react-leaflet";
 
-export default function MapClickHandler({ onSelect }) {
+export default function MapClickHandler({ onAddStore }) {
   useMapEvents({
     click(e) {
-      onSelect([e.latlng.lat, e.latlng.lng]);
+      onAddStore(e.latlng);
     },
   });
-
   return null;
 }

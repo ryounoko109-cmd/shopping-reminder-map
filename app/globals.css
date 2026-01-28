@@ -122,3 +122,21 @@ h1 {
   border: 3px solid #bfdbfe;
   box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.2);
 }
+
+/* 現在地パルス（iOS対応） */
+.leaflet-interactive.pulse {
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    stroke-opacity: 0.6;
+    fill-opacity: 0.4;
+    r: 8;
+  }
+  100% {
+    stroke-opacity: 0;
+    fill-opacity: 0;
+    r: 32;
+  }
+}

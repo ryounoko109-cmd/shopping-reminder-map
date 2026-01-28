@@ -7,8 +7,8 @@ export default function FollowCurrentLocation({ position }) {
   const map = useMap();
 
   useEffect(() => {
-    if (!map || !position) return;
-    map.setView(position, map.getZoom(), { animate: true });
+    if (!position) return;
+    map.setView(position);
   }, [position, map]);
 
   return null;
