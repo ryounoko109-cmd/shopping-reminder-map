@@ -140,3 +140,11 @@ h1 {
     r: 32;
   }
 }
+
+/* 長押しによる選択・メニューを無効化 */
+.leaflet-container {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  touch-action: manipulation;
+}
