@@ -274,7 +274,7 @@ export default function MapPage() {
         justifyContent: "space-between",
         padding: "0 12px",
       }}>
-        <b>🗺 買い物メモMAP</b>
+        <b>買い忘れ防止アプリ『BuyMind』​</b>
         <button onClick={() => setShowSettings(true)} style={{ background: "none", border: "none", color: "#fff", fontSize: 20 }}>
           ⚙️
         </button>
