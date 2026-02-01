@@ -18,19 +18,6 @@ const LONG_PRESS_MS = 700;
 const DEFAULT_NOTIFY_DISTANCE = 120; // m
 const DEFAULT_COOLDOWN_MIN = 30; // 分
 
-
-
-  return (
-    <MapContainer
-      center={[35.6812, 139.7671]}
-      zoom={16}
-      style={{ height: "100vh" }}
-    >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-    </MapContainer>
-  );
-
-
 /* =======================
    距離計算
 ======================= */
@@ -85,35 +72,6 @@ function MapJump({ target }) {
 
   return null;
 }
-
-{/* 現在地表示（既存 + パルス追加） */}
-{currentPos && (
-  <>
-    {/* パルス（追加） */}
-    <CircleMarker
-      center={currentPos}
-      radius={32}
-      pathOptions={{
-        color: "#2979ff",
-        fillColor: "#2979ff",
-        fillOpacity: 0.4,
-      }}
-      className="current-location-pulse"
-    />
-
-    {/* 中心点（既存・そのまま） */}
-    <CircleMarker
-      center={currentPos}
-      radius={8}
-      pathOptions={{
-        color: "#2979ff",
-        fillColor: "#2979ff",
-        fillOpacity: 1,
-      }}
-    />
-  </>
-)}
-
 
 /* =======================
    現在地ボタン
@@ -360,6 +318,35 @@ export default function MapPage() {
           ))}
 
           {currentPos && <CircleMarker center={currentPos} radius={8} />}
+
+{/* 現在地表示（既存 + パルス追加） */}
+{currentPos && (
+  <>
+    {/* パルス（追加） */}
+    <CircleMarker
+      center={currentPos}
+      radius={32}
+      pathOptions={{
+        color: "#2979ff",
+        fillColor: "#2979ff",
+        fillOpacity: 0.4,
+      }}
+      className="current-location-pulse"
+    />
+
+    {/* 中心点（既存・そのまま） */}
+    <CircleMarker
+      center={currentPos}
+      radius={8}
+      pathOptions={{
+        color: "#2979ff",
+        fillColor: "#2979ff",
+        fillOpacity: 1,
+      }}
+    />
+  </>
+)}
+
         </MapContainer>
 
         <button
