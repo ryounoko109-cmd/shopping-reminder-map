@@ -141,10 +141,15 @@ h1 {
   }
 }
 
-/* スマホ長押し暴走対策 */
-.leaflet-container {
-  -webkit-user-select: none;      /* 文字選択防止 */
-  -webkit-touch-callout: none;    /* iOS長押しメニュー防止 */
+/* スマホ長押し無効化 */
+* {
+  -webkit-touch-callout: none; /* iOS 長押しメニュー無効 */
+  -webkit-user-select: none;
   user-select: none;
-  touch-action: none;             /* スクロール・ズーム抑制 */
 }
+
+/* Leaflet 地図上の挙動を安定させる */
+.leaflet-container {
+  touch-action: none;
+}
+
