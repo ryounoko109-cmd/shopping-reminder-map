@@ -40,20 +40,23 @@ function AddStoreOnLongPress({ onAdd }) {
   const timerRef = useRef(null);
   const latlngRef = useRef(null);
 
-  useMapEvents({
-    mousedown(e) {
-      latlngRef.current = e.latlng;
-      timerRef.current = setTimeout(() => onAdd(latlngRef.current), LONG_PRESS_MS);
-    },
-    mouseup() { clearTimeout(timerRef.current); },
-    mousemove() { clearTimeout(timerRef.current); },
-    touchstart(e) {
-      latlngRef.current = e.latlng;
-      timerRef.current = setTimeout(() => onAdd(latlngRef.current), LONG_PRESS_MS);
-    },
-    touchend() { clearTimeout(timerRef.current); },
-    touchmove() { clearTimeout(timerRef.current); },
-  });
+useMapEvents({
+  touchstart(e) {
+    e.originalEvent.preventDefault(); // ← 超重要
+    latlngRef.current = e.latlng;
+    timerRef.current = setTimeout(
+      () => onAdd(latlngRef.current),
+      LONG_PRESS_MS
+    );
+  },
+  touchend() {
+    clearTimeout(timerRef.current);
+  },
+  touchmove() {
+    clearTimeout(timerRef.current);
+  },
+});
+
 
   return null;
 }
@@ -282,7 +285,7 @@ export default function MapPage() {
 
       {/* Map */}
       <div style={{ height: "calc(100vh - 52px)", position: "relative" }}>
-        <MapContainer center={currentPos || [35.6812, 139.7671]} zoom={16} style={{ height: "100%" }}>
+        <MapContainer center={currentPos || [35.6812, 139.7671]} zoom={16} style={{ height: "100%" }}tap={false}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <MapJump target={jumpTarget} />
           <AddStoreOnLongPress onAdd={addStore} />
