@@ -14,7 +14,7 @@ const Marker = dynamic(() => import("react-leaflet").then(m => m.Marker), { ssr:
 const Popup = dynamic(() => import("react-leaflet").then(m => m.Popup), { ssr: false });
 const CircleMarker = dynamic(() => import("react-leaflet").then(m => m.CircleMarker), { ssr: false });
 
-const LONG_PRESS_MS = 700;
+//const LONG_PRESS_MS = 700;
 const DEFAULT_NOTIFY_DISTANCE = 120; // m
 const DEFAULT_COOLDOWN_MIN = 30; // 分
 
@@ -33,33 +33,6 @@ function getDistance(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-/* =======================
-   長押しで店舗追加
-======================= */
-function AddStoreOnLongPress({ onAdd }) {
-  const timerRef = useRef(null);
-  const latlngRef = useRef(null);
-
-useMapEvents({
-  touchstart(e) {
-    e.originalEvent.preventDefault(); // ← 超重要
-    latlngRef.current = e.latlng;
-    timerRef.current = setTimeout(
-      () => onAdd(latlngRef.current),
-      LONG_PRESS_MS
-    );
-  },
-  touchend() {
-    clearTimeout(timerRef.current);
-  },
-  touchmove() {
-    clearTimeout(timerRef.current);
-  },
-});
-
-
-  return null;
-}
 
 /* =======================
    地図ジャンプ
@@ -75,6 +48,20 @@ function MapJump({ target }) {
 
   return null;
 }
+
+function AddStoreOnClick({ onAdd, isAdding, onFinish }) {
+  useMapEvents({
+    click(e) {
+      if (!isAdding) return;
+      onAdd(e.latlng);
+      onFinish(); // モード解除
+    },
+  });
+
+  return null;
+}
+
+
 
 /* =======================
    現在地ボタン
@@ -114,6 +101,7 @@ function CurrentLocationButton({ position }) {
 export default function MapPage() {
   const [stores, setStores] = useState([]);
   const [currentPos, setCurrentPos] = useState(null);
+  const [isAdding, setIsAdding] = useState(false);
   const [jumpTarget, setJumpTarget] = useState(null);
   const [showList, setShowList] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -288,7 +276,11 @@ export default function MapPage() {
         <MapContainer center={currentPos || [35.6812, 139.7671]} zoom={16} style={{ height: "100%" }}tap={false}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <MapJump target={jumpTarget} />
-          <AddStoreOnLongPress onAdd={addStore} />
+          <AddStoreOnClick
+            onAdd={addStore}
+            isAdding={isAdding}
+            onFinish={() => setIsAdding(false)}
+/>
           <CurrentLocationButton position={currentPos} />
 
           {stores.map(store => (
@@ -368,6 +360,26 @@ export default function MapPage() {
         >
           📋 店舗一覧
         </button>
+        <button
+  onClick={() => setIsAdding(!isAdding)}
+  style={{
+    position: "absolute",
+    bottom: 80,
+    right: 20,
+    zIndex: 1000,
+    width: 60,
+    height: 60,
+    borderRadius: "50%",
+    border: "none",
+    background: isAdding ? "#ff5252" : "#2979ff",
+    color: "#fff",
+    fontSize: 26,
+    boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+    cursor: "pointer",
+  }}
+>
+  {isAdding ? "×" : "＋"}
+</button>
       </div>
 {/* 店舗一覧ドロワー */}
 {showList && (
