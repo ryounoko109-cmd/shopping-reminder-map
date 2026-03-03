@@ -49,6 +49,17 @@ function MapJump({ target }) {
   return null;
 }
 
+function ChangeCursor({ isAdding }) {
+ const { useMap } = require("react-leaflet");
+ const map = useMap();
+ useEffect(() => {
+   if (!map) return;
+   const container = map.getContainer();
+   container.style.cursor = isAdding ? "crosshair" : "";
+ }, [isAdding, map]);
+ return null;
+}
+
 function AddStoreOnClick({ onAdd, isAdding, onFinish }) {
   useMapEvents({
     click(e) {
@@ -276,6 +287,7 @@ export default function MapPage() {
         <MapContainer center={currentPos || [35.6812, 139.7671]} zoom={16} style={{ height: "100%" }}tap={false}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <MapJump target={jumpTarget} />
+          <ChangeCursor isAdding={isAdding} />
           <AddStoreOnClick
             onAdd={addStore}
             isAdding={isAdding}
@@ -284,7 +296,19 @@ export default function MapPage() {
           <CurrentLocationButton position={currentPos} />
 
           {stores.map(store => (
-            <Marker key={store.id} position={[store.lat, store.lng]}>
+           // <Marker key={store.id} position={[store.lat, store.lng]}>
+           <Marker
+ key={store.id}
+ position={[store.lat, store.lng]}
+ eventHandlers={{
+   add: (e) => {
+     const el = e.target._icon;
+     if (el) {
+       el.classList.add("marker-pop");
+     }
+   },
+ }}
+>
               <Popup>
                 <div style={{ width: 220 }}>
                   <input
