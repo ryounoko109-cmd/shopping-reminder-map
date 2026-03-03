@@ -399,6 +399,16 @@ export default function MapPage() {
 
         </MapContainer>
 
+{isAdding && (
+<div
+   style={{
+     position: "absolute",
+     inset: 0,
+     background: "rgba(0,0,0,0.1)",
+     zIndex: 500,
+   }}
+ />
+)}
         <button
           onClick={() => setShowList(true)}
           style={{
@@ -419,7 +429,7 @@ export default function MapPage() {
   onClick={() => setIsAdding(!isAdding)}
   style={{
     position: "absolute",
-    bottom: 80,
+    bottom: 100,
     right: 20,
     zIndex: 1000,
     width: 60,
