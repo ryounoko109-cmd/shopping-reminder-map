@@ -287,7 +287,7 @@ export default function MapPage() {
 <div
    style={{
      position: "absolute",
-     top: 20,
+     top: 70,
      left: "50%",
      transform: "translateX(-50%)",
      background: "#2979ff",
@@ -354,8 +354,7 @@ export default function MapPage() {
                       <button onClick={() => deleteItem(store.id, i)}>✕</button>
                     </div>
                   ))}
-                  <button
- style={{
+                  <button onClick={() => addItem(store.id)}style={{
    minHeight: 44,
    fontSize: 14,
  }}
