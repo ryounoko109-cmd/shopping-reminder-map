@@ -141,15 +141,13 @@ h1 {
   }
 }
 
-/* スマホ長押し無効化 */
-* {
-  -webkit-touch-callout: none; /* iOS 長押しメニュー無効 */
-  -webkit-user-select: none;
-  user-select: none;
+button:active {
+ transform: scale(0.95);
 }
 
-/* Leaflet 地図上の挙動を安定させる */
-.leaflet-container {
-  touch-action: none;
+.custom-store-icon {
+ font-size: 28px;
+ text-align: center;
+ line-height: 30px;
+ filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
-
