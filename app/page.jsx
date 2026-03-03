@@ -406,6 +406,7 @@ export default function MapPage() {
      inset: 0,
      background: "rgba(0,0,0,0.1)",
      zIndex: 500,
+     pointerEvents: "none",
    }}
  />
 )}
