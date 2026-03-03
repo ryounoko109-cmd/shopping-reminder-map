@@ -201,6 +201,9 @@ export default function MapPage() {
             (store.memo ? `📝 ${store.memo}` : "未完了の商品があります"),
         });
 
+        if ("vibrate" in navigator) {
+ navigator.vibrate([150, 80, 150]);
+}
         notifiedRef.current[store.id] = now;
       }
     });
@@ -210,6 +213,10 @@ export default function MapPage() {
   const addStore = latlng => {
     const name = prompt("店舗名");
     if (!name) return;
+
+     if ("vibrate" in navigator) {
+   navigator.vibrate(100);
+ }
     setStores(s => [...s, {
       id: Date.now(),
       name,
@@ -276,6 +283,24 @@ export default function MapPage() {
         justifyContent: "space-between",
         padding: "0 12px",
       }}>
+        {isAdding && (
+<div
+   style={{
+     position: "absolute",
+     top: 20,
+     left: "50%",
+     transform: "translateX(-50%)",
+     background: "#2979ff",
+     color: "#fff",
+     padding: "8px 14px",
+     borderRadius: 20,
+     zIndex: 1500,
+     fontSize: 14,
+   }}
+>
+   地図をタップして店舗を登録
+</div>
+)}
         <b>買い忘れ防止アプリ『BuyMind』​</b>
         <button onClick={() => setShowSettings(true)} style={{ background: "none", border: "none", color: "#fff", fontSize: 20 }}>
           ⚙️
@@ -329,7 +354,14 @@ export default function MapPage() {
                       <button onClick={() => deleteItem(store.id, i)}>✕</button>
                     </div>
                   ))}
-                  <button onClick={() => addItem(store.id)}>＋商品</button>
+                  <button
+ style={{
+   minHeight: 44,
+   fontSize: 14,
+ }}
+>
+ ＋商品
+</button>
                   <button style={{ color: "red" }} onClick={() => deleteStore(store.id)}>削除</button>
                 </div>
               </Popup>
