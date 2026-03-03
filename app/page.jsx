@@ -416,7 +416,7 @@ export default function MapPage() {
             position: "absolute",
             bottom: 20,
             left: 20,
-            zIndex: 1000,
+            zIndex: 100,
             padding: "10px 14px",
             borderRadius: 20,
             border: "none",
