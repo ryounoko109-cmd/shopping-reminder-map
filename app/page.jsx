@@ -4,6 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+ iconRetinaUrl: markerIcon2x.src,
+ iconUrl: markerIcon.src,
+ shadowUrl: markerShadow.src,
+});
+
+const storeIcon = new L.DivIcon({
+ className: "custom-store-icon",
+ html: "🛒",
+ iconSize: [30, 30],
+ iconAnchor: [15, 30],
+});
 
 /* =======================
    react-leaflet（dynamic）
@@ -325,6 +343,8 @@ export default function MapPage() {
            <Marker
  key={store.id}
  position={[store.lat, store.lng]}
+ icon={storeIcon}
+>
  eventHandlers={{
    add: (e) => {
      const el = e.target._icon;
@@ -333,7 +353,7 @@ export default function MapPage() {
      }
    },
  }}
->
+
               <Popup>
                 <div style={{ width: 220 }}>
                   <input
