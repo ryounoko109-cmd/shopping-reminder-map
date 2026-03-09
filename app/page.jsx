@@ -5,16 +5,14 @@ import dynamic from "next/dynamic";
 import { useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
-
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
- iconRetinaUrl: markerIcon2x.src,
- iconUrl: markerIcon.src,
- shadowUrl: markerShadow.src,
-});
+if (typeof window !== "undefined") {
+ delete L.Icon.Default.prototype._getIconUrl;
+ L.Icon.Default.mergeOptions({
+   iconUrl: "/marker-icon.png",
+   iconRetinaUrl: "/marker-icon-2x.png",
+   shadowUrl: "/marker-shadow.png",
+ });
+}
 
 const storeIcon = new L.DivIcon({
  className: "custom-store-icon",
@@ -452,7 +450,7 @@ export default function MapPage() {
     position: "absolute",
     bottom: 100,
     right: 20,
-    zIndex: 1000,
+    zIndex: 100,
     width: 60,
     height: 60,
     borderRadius: "50%",
