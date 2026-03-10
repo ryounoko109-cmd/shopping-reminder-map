@@ -21,8 +21,8 @@ const storeIcon = typeof window !== "undefined" && L
 ? new L.DivIcon({
     className: "custom-store-icon",
     html: "🛒",
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
   })
 : null;
 
@@ -34,7 +34,6 @@ const TileLayer = dynamic(() => import("react-leaflet").then(m => m.TileLayer), 
 const Marker = dynamic(() => import("react-leaflet").then(m => m.Marker), { ssr: false });
 const Popup = dynamic(() => import("react-leaflet").then(m => m.Popup), { ssr: false });
 const CircleMarker = dynamic(() => import("react-leaflet").then(m => m.CircleMarker), { ssr: false });
-const Tooltip = dynamic(() => import("react-leaflet").then(m => m.Tooltip), { ssr: false });
 
 //const LONG_PRESS_MS = 700;
 const DEFAULT_NOTIFY_DISTANCE = 120; // m
@@ -394,17 +393,7 @@ onClick={async ()=>{
            <Marker
  key={store.id}
  position={[store.lat, store.lng]}
- icon={storeIcon || undefined}
- >
-  
-  <Tooltip
-permanent
-direction="top"
-offset={[0,-10]}
->
-{store.name}
-</Tooltip>
-<Popup></Popup>
+ icon={storeIcon}
  eventHandlers={{
    add: (e) => {
      const el = e.target._icon;
@@ -413,7 +402,7 @@ offset={[0,-10]}
      }
    },
  }}
-
+>
               <Popup>
                 <div style={{ width: 220 }}>
                   <input
