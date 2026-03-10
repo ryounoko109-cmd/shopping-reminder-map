@@ -21,8 +21,8 @@ const storeIcon = typeof window !== "undefined" && L
 ? new L.DivIcon({
     className: "custom-store-icon",
     html: "🛒",
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
   })
 : null;
 
@@ -394,8 +394,9 @@ onClick={async ()=>{
            <Marker
  key={store.id}
  position={[store.lat, store.lng]}
- icon={storeIcon}
+ icon={storeIcon || undefined}
  >
+  
   <Tooltip
 permanent
 direction="top"
