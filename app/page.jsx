@@ -55,6 +55,18 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 
 
+function sendNotification(storeName) {
+ if (Notification.permission === "granted") {
+   navigator.serviceWorker.ready.then(registration => {
+     registration.showNotification("BuyMind", {
+       body: `${storeName} が近くにあります`,
+       icon: "/icon-192.png"
+     });
+   });
+ }
+}
+
+
 /* =======================
    地図ジャンプ
 ======================= */
@@ -182,10 +194,10 @@ export default function MapPage() {
 
   /* 通知許可 */
   useEffect(() => {
-    if ("Notification" in window && Notification.permission === "default") {
-      Notification.requestPermission();
-    }
-  }, []);
+ if ("Notification" in window) {
+   Notification.requestPermission();
+ }
+}, []);
 
   /* GPS */
   useEffect(() => {
@@ -227,7 +239,7 @@ export default function MapPage() {
        new Notification("🛒 買い物リマインド",{
          body:
          `${store.name}\n` +
-         (store.memo ? `📝 ${store.memo}` : "未完了の商品があります")
+         (store.memo ? `📝 ${store.memo}` : "未購入の商品があります")
        })
        if("vibrate" in navigator){
          navigator.vibrate([200,100,200,100,300])
