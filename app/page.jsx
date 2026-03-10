@@ -473,7 +473,7 @@ export default function MapPage() {
       position: "fixed",
       inset: 0,
       background: "rgba(0,0,0,0.3)",
-      zIndex: 2500,
+      zIndex: 9999,
     }}
   >
     <div
