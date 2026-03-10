@@ -423,7 +423,7 @@ export default function MapPage() {
      position: "absolute",
      inset: 0,
      background: "rgba(0,0,0,0.1)",
-     zIndex: 1000,
+     zIndex: 100,
      pointerEvents: "none",
    }}
  />
@@ -434,7 +434,7 @@ export default function MapPage() {
             position: "absolute",
             bottom: 20,
             left: 20,
-            zIndex: 2000,
+            zIndex: 100,
             padding: "10px 14px",
             borderRadius: 20,
             border: "none",
