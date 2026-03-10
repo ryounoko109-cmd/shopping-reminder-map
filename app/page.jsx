@@ -337,7 +337,7 @@ export default function MapPage() {
           <CurrentLocationButton position={currentPos} />
 
           {stores.map(store => (
-           // <Marker key={store.id} position={[store.lat, store.lng]}>
+            <Marker key={store.id} position={[store.lat, store.lng]}>
            <Marker
  key={store.id}
  position={[store.lat, store.lng]}
@@ -450,7 +450,6 @@ export default function MapPage() {
     position: "absolute",
     bottom: 100,
     right: 20,
-    zIndex: 2500,
     width: 60,
     height: 60,
     borderRadius: "50%",
