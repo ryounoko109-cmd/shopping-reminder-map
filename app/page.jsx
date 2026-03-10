@@ -440,11 +440,9 @@ export default function MapPage() {
             boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
           }}
         >
-
-
+     📋 店舗一覧
 </button>
       </div>
-               📋 店舗一覧
         <button
   onClick={() => setIsAdding(!isAdding)}
   style={{
