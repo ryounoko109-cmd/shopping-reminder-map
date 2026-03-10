@@ -139,6 +139,8 @@ export default function MapPage() {
 
   const [notifyDistance, setNotifyDistance] = useState(DEFAULT_NOTIFY_DISTANCE);
   const [cooldownMin, setCooldownMin] = useState(DEFAULT_COOLDOWN_MIN);
+  const [nearStore,setNearStore] = useState(null)
+  const [notifyLog,setNotifyLog] = useState([]) 
 
   // storeId -> lastNotifyTime(ms)
   const notifiedRef = useRef({});
@@ -194,40 +196,58 @@ export default function MapPage() {
     return () => navigator.geolocation.clearWatch(id);
   }, []);
 
+  useEffect(()=>{
+ const id = setInterval(()=>{
+   checkStores()
+ },10000)
+ return ()=>clearInterval(id)
+},[currentPos,stores])
+
   /* ===== 距離 + クールタイム通知 ===== */
-  useEffect(() => {
-    if (!currentPos) return;
-
-    const now = Date.now();
-    const cooldownMs = cooldownMin * 60 * 1000;
-
-    stores.forEach(store => {
-      if (isCompletedStore(store)) return;
-
-      const last = notifiedRef.current[store.id];
-      if (last && now - last < cooldownMs) return;
-
-      const d = getDistance(
-        currentPos[0],
-        currentPos[1],
-        store.lat,
-        store.lng
-      );
-
-      if (d < notifyDistance && Notification.permission === "granted") {
-        new Notification("🛒 買い物リマインド", {
-          body:
-            `${store.name}\n` +
-            (store.memo ? `📝 ${store.memo}` : "未完了の商品があります"),
-        });
-
-        if ("vibrate" in navigator) {
- navigator.vibrate([150, 80, 150]);
+  const checkStores = () => {
+ if(!currentPos) return
+ const now = Date.now()
+ const cooldownMs = cooldownMin * 60 * 1000
+ stores.forEach(store => {
+   if (isCompletedStore(store)) return
+   const last = notifiedRef.current[store.id]
+   if(last && now-last < cooldownMs) return
+   const d = getDistance(
+     currentPos[0],
+     currentPos[1],
+     store.lat,
+     store.lng
+   )
+   if(d < notifyDistance){
+     setNearStore({
+       name:store.name,
+       dist:Math.floor(d)
+     })
+     if(Notification.permission === "granted"){
+       new Notification("🛒 買い物リマインド",{
+         body:
+         `${store.name}\n` +
+         (store.memo ? `📝 ${store.memo}` : "未完了の商品があります")
+       })
+       if("vibrate" in navigator){
+         navigator.vibrate([200,100,200,100,300])
+       }
+       setNotifyLog(log=>[
+         ...log,
+         {
+           name:store.name,
+           time:new Date().toLocaleTimeString()
+         }
+       ])
+       notifiedRef.current[store.id] = now
+     }
+   }
+ })
 }
-        notifiedRef.current[store.id] = now;
-      }
-    });
-  }, [currentPos, stores, notifyDistance, cooldownMin]);
+  
+  useEffect(()=>{
+ checkStores()
+},[currentPos,stores,notifyDistance,cooldownMin]);
 
   /* 店舗・商品操作（既存） */
   const addStore = latlng => {
@@ -322,6 +342,26 @@ export default function MapPage() {
 </div>
 )}
         <b>買い忘れ防止アプリ『BuyMind』​</b>
+
+        <button
+onClick={()=>{
+ if(Notification.permission !== "granted"){
+   alert("通知許可してください")
+   return
+ }
+ new Notification("テスト通知",{
+   body:"通知は正常に動作しています"
+ })
+}}
+style={{
+position:"absolute",
+top:60,
+right:10,
+zIndex:2000
+}}
+>
+🔔テスト
+</button>
         <button onClick={() => setShowSettings(true)} style={{ background: "none", border: "none", color: "#fff", fontSize: 20 }}>
           ⚙️
         </button>
