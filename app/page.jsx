@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useMapEvents } from "react-leaflet";
+import { useMap, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 let L = null;
 if (typeof window !== "undefined") {
@@ -58,9 +58,9 @@ function getDistance(lat1, lng1, lat2, lng2) {
 /* =======================
    地図ジャンプ
 ======================= */
+import { useMap } from "react-leaflet";
 function MapJump({ target }) {
-  const { useMap } = require("react-leaflet");
-  const map = useMap();
+ const map = useMap();
 
   useEffect(() => {
     if (!target) return;
