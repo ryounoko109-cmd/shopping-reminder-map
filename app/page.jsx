@@ -429,10 +429,10 @@ export default function MapPage() {
         <button
           onClick={() => setShowList(true)}
           style={{
-            position: "absolute",
+            position: "fixed",
             bottom: 20,
             left: 20,
-            zIndex: 2000,
+            zIndex: 10000,
             padding: "10px 14px",
             borderRadius: 20,
             border: "none",
