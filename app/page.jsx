@@ -343,21 +343,18 @@ export default function MapPage() {
 )}
         <b>買い忘れ防止アプリ『BuyMind』​</b>
 
-        <button
-onClick={()=>{
+<button
+onClick={async ()=>{
  if(Notification.permission !== "granted"){
-   alert("通知許可してください")
-   return
+   const permission = await Notification.requestPermission()
+   if(permission !== "granted"){
+     alert("通知が許可されていません")
+     return
+   }
  }
- new Notification("テスト通知",{
+ new Notification("🛒 テスト通知",{
    body:"通知は正常に動作しています"
  })
-}}
-style={{
-position:"absolute",
-top:60,
-right:10,
-zIndex:2000
 }}
 >
 🔔テスト
