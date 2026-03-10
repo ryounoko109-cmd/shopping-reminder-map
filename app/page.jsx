@@ -34,6 +34,7 @@ const TileLayer = dynamic(() => import("react-leaflet").then(m => m.TileLayer), 
 const Marker = dynamic(() => import("react-leaflet").then(m => m.Marker), { ssr: false });
 const Popup = dynamic(() => import("react-leaflet").then(m => m.Popup), { ssr: false });
 const CircleMarker = dynamic(() => import("react-leaflet").then(m => m.CircleMarker), { ssr: false });
+const Tooltip = dynamic(() => import("react-leaflet").then(m => m.Tooltip), { ssr: false });
 
 //const LONG_PRESS_MS = 700;
 const DEFAULT_NOTIFY_DISTANCE = 120; // m
@@ -394,6 +395,15 @@ onClick={async ()=>{
  key={store.id}
  position={[store.lat, store.lng]}
  icon={storeIcon}
+ >
+  <Tooltip
+permanent
+direction="top"
+offset={[0,-10]}
+>
+{store.name}
+</Tooltip>
+<Popup></Popup>
  eventHandlers={{
    add: (e) => {
      const el = e.target._icon;
@@ -402,7 +412,7 @@ onClick={async ()=>{
      }
    },
  }}
->
+
               <Popup>
                 <div style={{ width: 220 }}>
                   <input
