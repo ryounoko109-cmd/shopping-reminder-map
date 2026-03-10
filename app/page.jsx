@@ -441,7 +441,7 @@ export default function MapPage() {
           }}
         >
 
-  {isAdding ? "×" : "＋"}
+
 </button>
       </div>
                📋 店舗一覧
@@ -462,7 +462,9 @@ export default function MapPage() {
     cursor: "pointer",
     zIndex: 2000,
   }}
-></button>
+  >
+    {isAdding ? "×" : "＋"}
+</button>
 {/* 店舗一覧ドロワー */}
 {showList && (
   <div
