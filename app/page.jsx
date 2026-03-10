@@ -485,6 +485,7 @@ export default function MapPage() {
         right: 0,
         maxHeight: "60%",
         background: "#fff",
+        color: "#000000",
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
         padding: 12,
