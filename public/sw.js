@@ -16,3 +16,23 @@ self.addEventListener("push", e => {
     }
   );
 });
+
+self.addEventListener("install", event => {
+ console.log("Service Worker installed");
+ self.skipWaiting();
+});
+self.addEventListener("activate", event => {
+ console.log("Service Worker active");
+});
+self.addEventListener("push", event => {
+ const data = event.data?.json() || {
+   title: "BuyMind",
+   body: "近くに登録した店舗があります"
+ };
+ self.registration.showNotification(data.title, {
+   body: data.body,
+   icon: "/icon-192.png",
+   badge: "/icon-192.png",
+   vibrate: [200,100,200]
+ });
+});
