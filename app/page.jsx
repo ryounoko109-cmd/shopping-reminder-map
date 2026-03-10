@@ -325,7 +325,7 @@ export default function MapPage() {
 
       {/* Map */}
       <div style={{ height: "calc(100vh - 52px)", position: "relative" }}>
-        //<MapContainer center={currentPos || [35.6812, 139.7671]} zoom={16} style={{ height: "100%" }}tap={false}>
+        //<MapContainer center={currentPos || [35.6812, 139.7671]} zoom={16} style={{ height: "100%",zIndex: 1}}tap={false}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <MapJump target={jumpTarget} />
           <ChangeCursor isAdding={isAdding} />
@@ -423,7 +423,7 @@ export default function MapPage() {
      position: "absolute",
      inset: 0,
      background: "rgba(0,0,0,0.1)",
-     zIndex: 500,
+     zIndex: 1000,
      pointerEvents: "none",
    }}
  />
