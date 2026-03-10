@@ -460,6 +460,7 @@ export default function MapPage() {
     fontSize: 26,
     boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
     cursor: "pointer",
+    zIndex: 9999,
   }}
 >
   {isAdding ? "×" : "＋"}
