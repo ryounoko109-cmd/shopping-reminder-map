@@ -324,7 +324,7 @@ export default function MapPage() {
       </div>
 
       {/* Map */}
-      <div style={{ height: "calc(100vh - 52px)", position: "relative" }}>
+      <div style={{ height: "calc(100vh - 52px)", position: "relative" ,zIndex: 0}}>
         <MapContainer center={currentPos || [35.6812, 139.7671]} zoom={16} style={{ height: "100%",zIndex: 0}}tap={false}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <MapJump target={jumpTarget} />
@@ -445,7 +445,7 @@ export default function MapPage() {
         <button
   onClick={() => setIsAdding(!isAdding)}
   style={{
-    position: "absolute",
+    position: "fixed",
     bottom: 100,
     right: 20,
     width: 60,
