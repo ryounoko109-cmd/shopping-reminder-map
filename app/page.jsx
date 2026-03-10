@@ -489,6 +489,7 @@ export default function MapPage() {
         borderTopRightRadius: 16,
         padding: 12,
         overflowY: "auto",
+        zIndex: 9999,
       }}
     >
       <b>📋 店舗一覧</b>
