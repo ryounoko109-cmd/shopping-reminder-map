@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-if (typeof window !== "undefined") {
+let L;
+if (typeof window !== "undefined" && L) {
  delete L.Icon.Default.prototype._getIconUrl;
  L.Icon.Default.mergeOptions({
    iconUrl: "/marker-icon.png",
@@ -14,12 +14,14 @@ if (typeof window !== "undefined") {
  });
 }
 
-const storeIcon = new L.DivIcon({
- className: "custom-store-icon",
- html: "🛒",
- iconSize: [30, 30],
- iconAnchor: [15, 30],
-});
+const storeIcon = typeof window !== "undefined" && L
+? new L.DivIcon({
+    className: "custom-store-icon",
+    html: "🛒",
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+  })
+: null;
 
 /* =======================
    react-leaflet（dynamic）
