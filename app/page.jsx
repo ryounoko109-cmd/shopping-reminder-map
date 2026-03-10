@@ -440,8 +440,11 @@ export default function MapPage() {
             boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
           }}
         >
-          📋 店舗一覧
-        </button>
+
+  {isAdding ? "×" : "＋"}
+</button>
+      </div>
+               📋 店舗一覧
         <button
   onClick={() => setIsAdding(!isAdding)}
   style={{
@@ -459,10 +462,7 @@ export default function MapPage() {
     cursor: "pointer",
     zIndex: 2000,
   }}
->
-  {isAdding ? "×" : "＋"}
-</button>
-      </div>
+></button>
 {/* 店舗一覧ドロワー */}
 {showList && (
   <div
