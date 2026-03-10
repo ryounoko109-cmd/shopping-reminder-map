@@ -4,7 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-let L;
+let L = null;
+if (typeof window !== "undefined") {
+  L = require("leaflet");
+}
 if (typeof window !== "undefined" && L) {
  delete L.Icon.Default.prototype._getIconUrl;
  L.Icon.Default.mergeOptions({
