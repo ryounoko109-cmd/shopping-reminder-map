@@ -1,7 +1,7 @@
 import "leaflet/dist/leaflet.css";
 
 export const metadata = {
-  title: "買い物忘れ防止マップ",
+  title: "BuyMind",
   manifest: "/manifest.json",
 };
 

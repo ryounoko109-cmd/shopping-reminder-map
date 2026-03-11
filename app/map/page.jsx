@@ -305,7 +305,7 @@ useEffect(() => {
         justifyContent: "space-between",
         padding: "0 12px",
       }}>
-        <b> 買い物メモMAP  BuyMind</b>
+        <b>BuyMind</b>
         <button onClick={() => setShowSettings(true)} style={{ background: "none", border: "none", color: "#fff", fontSize: 20 }}>
           ⚙️
         </button>

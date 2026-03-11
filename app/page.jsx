@@ -353,7 +353,7 @@ export default function MapPage() {
    地図をタップして店舗を登録
 </div>
 )}
-        <b>買い忘れ防止アプリ『BuyMind』​</b>
+        <b>BuyMind​</b>
 
 <button
 onClick={async ()=>{
